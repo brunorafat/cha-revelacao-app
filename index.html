@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá Revelação - Apostas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --yellow-pastel: #FFF9C4;
+            --blue-pastel: #BBDEFB;
+            --pink-pastel: #F8BBD0;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--yellow-pastel), var(--blue-pastel), var(--pink-pastel));
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--yellow-pastel), var(--blue-pastel), var(--pink-pastel));
+            padding: 80px 0;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            margin-bottom: 25px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .btn-primary {
+            background-color: #9C27B0;
+            border-color: #9C27B0;
+        }
+        
+        .btn-primary:hover {
+            background-color: #7B1FA2;
+            border-color: #7B1FA2;
+        }
+        
+        .btn-outline-primary {
+            color: #9C27B0;
+            border-color: #9C27B0;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: #9C27B0;
+            border-color: #9C27B0;
+        }
+        
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .event-card {
+            border-left: 5px solid var(--pink-pastel);
+        }
+        
+        .boy-btn {
+            background-color: var(--blue-pastel);
+            color: #0d47a1;
+            border: none;
+        }
+        
+        .girl-btn {
+            background-color: var(--pink-pastel);
+            color: #880e4f;
+            border: none;
+        }
+        
+        /* Modal styles */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--yellow-pastel), var(--blue-pastel), var(--pink-pastel));
+            border-radius: 15px 15px 0 0;
+            border-bottom: none;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        
+        /* Estatísticas */
+        .stats-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .progress {
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar-boy {
+            background-color: var(--blue-pastel);
+            color: #0d47a1;
+        }
+        
+        .progress-bar-girl {
+            background-color: var(--pink-pastel);
+            color: #880e4f;
+        }
+        
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .stats-label {
+            font-weight: 600;
+        }
+        
+        .stats-value {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Chá Revelação</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Como Funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contato</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Aposte e Divirta-se!</h1>
+            <p class="lead">Participe dos eventos de chá revelação, aposte no sexo do bebê e concorra a prêmios!</p>
+            <button class="btn btn-primary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#registerModal">Criar Meu Evento</button>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Como Funciona</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-user-plus fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">1. Cadastre-se</h5>
+                        <p class="card-text">Crie sua conta gratuitamente para participar dos eventos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-baby fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">2. Aposte</h5>
+                        <p class="card-text">Escolha um evento e aposte se será menino ou menina por apenas R$15.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-gift fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">3. Ganhe Prêmios</h5>
+                        <p class="card-text">Se você acertar, participa do sorteio e pode ganhar 50% do prêmio!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eventos Ativos -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Eventos Ativos</h2>
+        <div class="row g-4" id="events-container">
+            <!-- Eventos serão carregados dinamicamente aqui -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200?text=Chá+Revelação" class="card-img-top" alt="Evento de Chá Revelação">
+                    <div class="card-body">
+                        <h5 class="card-title">Bebê dos Silva</h5>
+                        <p class="card-text">Pais: Maria e João Silva</p>
+                        <p class="card-text"><small class="text-muted">Revelação: 15/06/2025</small></p>
+                        
+                        <!-- Estatísticas do Evento -->
+                        <div class="stats-container">
+                            <div class="stats-item">
+                                <span class="stats-label">Total arrecadado:</span>
+                                <span class="stats-value">R$ 450,00</span>
+                            </div>
+                            
+                            <div class="stats-item">
+                                <span class="stats-label">Apostas:</span>
+                                <span class="stats-value">30 participantes</span>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-mars text-primary"></i> Menino: 60%</span>
+                                    <span><i class="fas fa-venus text-danger"></i> Menina: 40%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-boy" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-girl" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-item">
+                                <span class="stats-label">Prêmio estimado:</span>
+                                <span class="stats-value">R$ 75,00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn boy-btn flex-grow-1 me-2">Menino</button>
+                            <button class="btn girl-btn flex-grow-1">Menina</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200?text=Chá+Revelação" class="card-img-top" alt="Evento de Chá Revelação">
+                    <div class="card-body">
+                        <h5 class="card-title">Bebê dos Santos</h5>
+                        <p class="card-text">Pais: Ana e Carlos Santos</p>
+                        <p class="card-text"><small class="text-muted">Revelação: 22/06/2025</small></p>
+                        
+                        <!-- Estatísticas do Evento -->
+                        <div class="stats-container">
+                            <div class="stats-item">
+                                <span class="stats-label">Total arrecadado:</span>
+                                <span class="stats-value">R$ 675,00</span>
+                            </div>
+                            
+                            <div class="stats-item">
+                                <span class="stats-label">Apostas:</span>
+                                <span class="stats-value">45 participantes</span>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-mars text-primary"></i> Menino: 35%</span>
+                                    <span><i class="fas fa-venus text-danger"></i> Menina: 65%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-boy" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-girl" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-item">
+                                <span class="stats-label">Prêmio estimado:</span>
+                                <span class="stats-value">R$ 112,50</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn boy-btn flex-grow-1 me-2">Menino</button>
+                            <button class="btn girl-btn flex-grow-1">Menina</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200?text=Chá+Revelação" class="card-img-top" alt="Evento de Chá Revelação">
+                    <div class="card-body">
+                        <h5 class="card-title">Bebê dos Oliveira</h5>
+                        <p class="card-text">Pais: Juliana e Pedro Oliveira</p>
+                        <p class="card-text"><small class="text-muted">Revelação: 30/06/2025</small></p>
+                        
+                        <!-- Estatísticas do Evento -->
+                        <div class="stats-container">
+                            <div class="stats-item">
+                                <span class="stats-label">Total arrecadado:</span>
+                                <span class="stats-value">R$ 300,00</span>
+                            </div>
+                            
+                            <div class="stats-item">
+                                <span class="stats-label">Apostas:</span>
+                                <span class="stats-value">20 participantes</span>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-mars text-primary"></i> Menino: 50%</span>
+                                    <span><i class="fas fa-venus text-danger"></i> Menina: 50%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-boy" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-girl" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-item">
+                                <span class="stats-label">Prêmio estimado:</span>
+                                <span class="stats-value">R$ 50,00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn boy-btn flex-grow-1 me-2">Menino</button>
+                            <button class="btn girl-btn flex-grow-1">Menina</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-primary">Ver Mais Eventos</button>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section class="container my-5 py-5 bg-light rounded-3">
+        <h2 class="text-center mb-4">Crie Seu Próprio Evento</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Plano Mensal</h3>
+                        <h1 class="my-4">R$29,90</h1>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">✓ Crie seu evento de chá revelação</li>
+                            <li class="mb-2">✓ Compartilhe com amigos e familiares</li>
+                            <li class="mb-2">✓ Receba 10 reais por cada aposta</li>
+                            <li class="mb-2">✓ Sorteio automático entre os acertadores</li>
+                            <li class="mb-2">✓ Suporte prioritário</li>
+                        </ul>
+                        <button class="btn btn-primary btn-lg mt-3 w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Assinar Agora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Depoimentos</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3 text-warning">
+                            ★★★★★
+                        </div>
+                        <p class="card-text">"Criamos nosso evento e foi um sucesso! Todos os amigos e familiares participaram e nos divertimos muito com as apostas."</p>
+                        <p class="card-text"><small class="text-muted">- Maria e João Silva</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3 text-warning">
+                            ★★★★★
+                        </div>
+                        <p class="card-text">"Apostei que seria uma menina e acertei! Fui sorteada e ganhei um prêmio incrível. Experiência maravilhosa!"</p>
+                        <p class="card-text"><small class="text-muted">- Ana Souza</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3 text-warning">
+                            ★★★★★
+                        </div>
+                        <p class="card-text">"A plataforma é super fácil de usar e o sistema de apostas é muito divertido. Recomendo para todos os futuros pais!"</p>
+                        <p class="card-text"><small class="text-muted">- Carlos Santos</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Chá Revelação</h5>
+                    <p>A plataforma perfeita para tornar seu chá revelação ainda mais especial e divertido!</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Início</a></li>
+                        <li><a href="#" class="text-white">Como Funciona</a></li>
+                        <li><a href="#" class="text-white">Eventos</a></li>
+                        <li><a href="#" class="text-white">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contato</h5>
+                    <ul class="list-unstyled">
+                        <li>contato@charevelacao.com.br</li>
+                        <li>(11) 99999-9999</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">© 2025 Chá Revelação. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Cadastre-se</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPhone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="registerPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerCPF" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="registerCPF" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </form>
+                    <div class="alert alert-success mt-3 d-none" id="registerSuccess">
+                        Cadastro realizado com sucesso! Faça login para continuar.
+                    </div>
+                    <div class="alert alert-danger mt-3 d-none" id="registerError">
+                        Erro ao realizar cadastro. Tente novamente.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Entrar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                    <div class="alert alert-danger mt-3 d-none" id="loginError">
+                        E-mail ou senha incorretos. Tente novamente.
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes do Evento -->
+    <div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventDetailsModalLabel">Detalhes do Evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://via.placeholder.com/400x300?text=Chá+Revelação" class="img-fluid rounded" alt="Evento de Chá Revelação">
+                        </div>
+                        <div class="col-md-6">
+                            <h4 id="eventTitle">Bebê dos Silva</h4>
+                            <p><strong>Pais:</strong> <span id="eventParents">Maria e João Silva</span></p>
+                            <p><strong>Data da Revelação:</strong> <span id="eventDate">15/06/2025</span></p>
+                            
+                            <div class="stats-container mt-3">
+                                <h5>Estatísticas</h5>
+                                <div class="stats-item">
+                                    <span class="stats-label">Total arrecadado:</span>
+                                    <span class="stats-value" id="eventTotalRaised">R$ 450,00</span>
+                                </div>
+                                
+                                <div class="stats-item">
+                                    <span class="stats-label">Apostas:</span>
+                                    <span class="stats-value" id="eventTotalBets">30 participantes</span>
+                                </div>
+                                
+                                <div class="mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span><i class="fas fa-mars text-primary"></i> Menino: <span id="eventBoyPercentage">60</span>%</span>
+                                        <span><i class="fas fa-venus text-danger"></i> Menina: <span id="eventGirlPercentage">40</span>%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-boy" id="eventBoyProgress" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-girl" id="eventGirlProgress" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-item">
+                                    <span class="stats-label">Prêmio estimado:</span>
+                                    <span class="stats-value" id="eventPrize">R$ 75,00</span>
+                                </div>
+                                
+                                <div class="stats-item">
+                                    <span class="stats-label">Valor para os pais:</span>
+                                    <span class="stats-value" id="eventParentsPrize">R$ 375,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>Faça sua aposta</h5>
+                        <p>Valor da aposta: R$ 15,00</p>
+                        <div class="d-flex">
+                            <button class="btn boy-btn flex-grow-1 me-2">Menino</button>
+                            <button class="btn girl-btn flex-grow-1">Menina</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL base da API
+            const API_BASE_URL = window.location.origin;
+            
+            // Carregar eventos
+            function loadEvents() {
+                fetch(`${API_BASE_URL}/api/events/list`)
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                try {
+                                    return JSON.parse(text);
+                                } catch (e) {
+                                    throw new Error('Resposta inválida do servidor: ' + text);
+                                }
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.events && data.events.length > 0) {
+                            const eventsContainer = document.getElementById('events-container');
+                            eventsContainer.innerHTML = '';
+                            
+                            data.events.forEach(event => {
+                                const eventCard = createEventCard(event);
+                                eventsContainer.appendChild(eventCard);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao carregar eventos:', error);
+                    });
+            }
+            
+            // Criar card de evento
+            function createEventCard(event) {
+                const totalBets = event.boy_bets_count + event.girl_bets_count;
+                const boyPercentage = totalBets > 0 ? Math.round((event.boy_bets_count / totalBets) * 100) : 0;
+                const girlPercentage = totalBets > 0 ? Math.round((event.girl_bets_count / totalBets) * 100) : 0;
+                
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col-md-4';
+                
+                colDiv.innerHTML = `
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/300x200?text=Chá+Revelação" class="card-img-top" alt="Evento de Chá Revelação">
+                        <div class="card-body">
+                            <h5 class="card-title">${event.title}</h5>
+                            <p class="card-text">Pais: ${event.creator_name}</p>
+                            <p class="card-text"><small class="text-muted">Revelação: ${formatDate(event.reveal_date)}</small></p>
+                            
+                            <!-- Estatísticas do Evento -->
+                            <div class="stats-container">
+                                <div class="stats-item">
+                                    <span class="stats-label">Total arrecadado:</span>
+                                    <span class="stats-value">R$ ${event.total_raised.toFixed(2)}</span>
+                                </div>
+                                
+                                <div class="stats-item">
+                                    <span class="stats-label">Apostas:</span>
+                                    <span class="stats-value">${totalBets} participantes</span>
+                                </div>
+                                
+                                <div class="mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span><i class="fas fa-mars text-primary"></i> Menino: ${boyPercentage}%</span>
+                                        <span><i class="fas fa-venus text-danger"></i> Menina: ${girlPercentage}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-boy" role="progressbar" style="width: ${boyPercentage}%" aria-valuenow="${boyPercentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-girl" role="progressbar" style="width: ${girlPercentage}%" aria-valuenow="${girlPercentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-item">
+                                    <span class="stats-label">Prêmio estimado:</span>
+                                    <span class="stats-value">R$ ${event.estimated_winner_prize.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mt-3">
+                                <button class="btn boy-btn flex-grow-1 me-2" data-event-id="${event.id}" data-gender="boy">Menino</button>
+                                <button class="btn girl-btn flex-grow-1" data-event-id="${event.id}" data-gender="girl">Menina</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Adicionar evento de clique para mostrar detalhes
+                colDiv.querySelector('.card').addEventListener('click', function(e) {
+                    // Não abrir modal se clicou nos botões de aposta
+                    if (!e.target.classList.contains('boy-btn') && !e.target.classList.contains('girl-btn')) {
+                        showEventDetails(event);
+                    }
+                });
+                
+                // Adicionar eventos de clique para os botões de aposta
+                colDiv.querySelector('.boy-btn').addEventListener('click', function() {
+                    placeBet(event.id, 'boy');
+                });
+                
+                colDiv.querySelector('.girl-btn').addEventListener('click', function() {
+                    placeBet(event.id, 'girl');
+                });
+                
+                return colDiv;
+            }
+            
+            // Mostrar detalhes do evento
+            function showEventDetails(event) {
+                const totalBets = event.boy_bets_count + event.girl_bets_count;
+                const boyPercentage = totalBets > 0 ? Math.round((event.boy_bets_count / totalBets) * 100) : 0;
+                const girlPercentage = totalBets > 0 ? Math.round((event.girl_bets_count / totalBets) * 100) : 0;
+                
+                document.getElementById('eventTitle').textContent = event.title;
+                document.getElementById('eventParents').textContent = event.creator_name;
+                document.getElementById('eventDate').textContent = formatDate(event.reveal_date);
+                document.getElementById('eventTotalRaised').textContent = `R$ ${event.total_raised.toFixed(2)}`;
+                document.getElementById('eventTotalBets').textContent = `${totalBets} participantes`;
+                document.getElementById('eventBoyPercentage').textContent = boyPercentage;
+                document.getElementById('eventGirlPercentage').textContent = girlPercentage;
+                document.getElementById('eventBoyProgress').style.width = `${boyPercentage}%`;
+                document.getElementById('eventBoyProgress').setAttribute('aria-valuenow', boyPercentage);
+                document.getElementById('eventGirlProgress').style.width = `${girlPercentage}%`;
+                document.getElementById('eventGirlProgress').setAttribute('aria-valuenow', girlPercentage);
+                document.getElementById('eventPrize').textContent = `R$ ${event.estimated_winner_prize.toFixed(2)}`;
+                document.getElementById('eventParentsPrize').textContent = `R$ ${event.estimated_parents_prize.toFixed(2)}`;
+                
+                const modal = new bootstrap.Modal(document.getElementById('eventDetailsModal'));
+                modal.show();
+            }
+            
+            // Realizar aposta
+            function placeBet(eventId, gender) {
+                // Verificar se o usuário está logado
+                const token = localStorage.getItem('token');
+                const user = JSON.parse(localStorage.getItem('user'));
+                
+                if (!token || !user) {
+                    alert('Você precisa estar logado para fazer uma aposta!');
+                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                    loginModal.show();
+                    return;
+                }
+                
+                fetch(`${API_BASE_URL}/api/events/bet`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        event_id: eventId,
+                        gender_guess: gender
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            try {
+                                return JSON.parse(text);
+                            } catch (e) {
+                                throw new Error('Resposta inválida do servidor: ' + text);
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.message === 'Aposta realizada com sucesso!') {
+                        alert('Aposta realizada com sucesso!');
+                        loadEvents(); // Recarregar eventos para atualizar estatísticas
+                    } else {
+                        throw new Error(data.message || 'Erro ao realizar aposta');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao realizar aposta:', error);
+                    alert(error.message || 'Erro ao realizar aposta. Tente novamente.');
+                });
+            }
+            
+            // Formatar data
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('pt-BR');
+            }
+            
+            // Formulário de Cadastro
+            const registerForm = document.getElementById('registerForm');
+            const registerSuccess = document.getElementById('registerSuccess');
+            const registerError = document.getElementById('registerError');
+
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const phone = document.getElementById('registerPhone').value;
+                const cpf = document.getElementById('registerCPF').value;
+                
+                // Requisição para a API de cadastro
+                fetch(`${API_BASE_URL}/api/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password,
+                        phone: phone,
+                        cpf: cpf
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            try {
+                                return JSON.parse(text);
+                            } catch (e) {
+                                throw new Error('Resposta inválida do servidor: ' + text);
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.message === 'Usuário cadastrado com sucesso!') {
+                        registerSuccess.classList.remove('d-none');
+                        registerError.classList.add('d-none');
+                        registerForm.reset();
+                        
+                        // Redirecionar para login após 2 segundos
+                        setTimeout(() => {
+                            const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                            registerModal.hide();
+                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                            loginModal.show();
+                        }, 2000);
+                    } else {
+                        throw new Error(data.message || 'Erro ao cadastrar');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro completo:', error);
+                    registerError.textContent = error.message;
+                    registerError.classList.remove('d-none');
+                    registerSuccess.classList.add('d-none');
+                });
+            });
+            
+            // Formulário de Login
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Requisição para a API de login
+                fetch(`${API_BASE_URL}/api/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            try {
+                                return JSON.parse(text);
+                            } catch (e) {
+                                throw new Error('Resposta inválida do servidor: ' + text);
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.token) {
+                        // Salvar token no localStorage
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        
+                        // Fechar modal e redirecionar
+                        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                        loginModal.hide();
+                        
+                        // Atualizar UI para usuário logado
+                        updateUIForLoggedUser(data.user.name);
+                        
+                        // Recarregar eventos
+                        loadEvents();
+                    } else {
+                        throw new Error(data.message || 'Erro ao fazer login');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro completo:', error);
+                    loginError.textContent = error.message;
+                    loginError.classList.remove('d-none');
+                });
+            });
+            
+            // Função para atualizar UI quando usuário está logado
+            function updateUIForLoggedUser(userName) {
+                const navbarButtons = document.querySelector('.navbar .d-flex');
+                navbarButtons.innerHTML = `
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Olá, ${userName}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Meus Eventos</a></li>
+                            <li><a class="dropdown-item" href="#">Minhas Apostas</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutButton">Sair</a></li>
+                        </ul>
+                    </div>
+                `;
+                
+                // Adicionar evento de logout
+                document.getElementById('logoutButton').addEventListener('click', function() {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.reload();
+                });
+            }
+            
+            // Verificar se usuário já está logado ao carregar a página
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user'));
+            
+            if (token && user) {
+                updateUIForLoggedUser(user.name);
+            }
+            
+            // Carregar eventos ao iniciar
+            loadEvents();
+        });
+    </script>
+</body>
+</html>
